@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Buddy</title>
+    <link rel="stylesheet" href="gym.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<body>
+    <!-- 🔐 LOGIN SCREEN -->
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-box">
+
+        <h2>Fitness Buddy Login</h2>
+
+        <input id="loginName" placeholder="Name">
+        <input id="loginEmail" placeholder="Email">
+        <input id="loginPassword" type="password" placeholder="Password">
+
+        <div class="login-buttons">
+            <button id="registerBtn">Register</button>
+            <button id="loginBtn">Login</button>
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            Fitness Buddy
+            <img src="logo.png" alt="logo" class="logo-img">
+        </div>
+
+        <div class="nav-right">
+            <li id="profileBox" style="color:white; font-weight:bold; display:none;">
+    👤 <span id="profileName"></span>
+</li>
+
+<li>
+    <button id="logoutBtn" style="
+        display:none;
+        padding:6px 12px;
+        border-radius:15px;
+        border:none;
+        background:red;
+        color:white;
+        cursor:pointer;
+    ">
+        Logout
+    </button>
+</li>
+           <ul class="nav-links">
+    <li><a href="#Home">Home</a></li>
+
+    <li><a href="#Video">Videos</a></li>
+
+    <li><a href="#BMI">BMI Calc</a></li>
+
+    <li><a href="#Calories">Calories</a></li>
+
+    <li><a href="#Diet">Diet Planner</a></li>
+
+    <li><a href="#Membership">Membership</a></li>
+
+    <li><a href="#About">About</a></li>
+
+</ul>
+
+            <div class="dropdown" id="dropdown">
+                <div class="dropdown-btn">
+                    🤸Workouts <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown-menu">
+                    <div>🦾All Workout</div>
+                    <div>🦍Back</div>
+                    <div>🏋️Chest</div>
+                    <div>🤺Biceps & Triceps</div>
+                    <div>🦿Legs</div>
+                    <div>⛷️Shoulder</div>
+                </div>
+            </div>
+
+            <img src="bot.png" class="bot-icon" id="chatToggle">
+        </div>
+    </nav>
+
+    <!-- HOME -->
+    <section class="home-section" id="Home">
+        <div class="home-content">
+            <h1>FITNESS BUDDY AI</h1>
+            <p>Your Personal AI Fitness Trainer</p>
+        </div>
+    </section>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="bgvid.mp4" type="video/mp4">
+    </video>
+
+    <!-- CHATBOX -->
+    <div class="chatbox" id="chatbox">
+        <div class="chat-header">
+            <span class="chat-title">Fitness AI 🤖</span>
+            <span id="closeChat">✖</span>
+        </div>
+
+        <div class="chat-body" id="chatBody"></div>
+
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type anything...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- WORKOUT PANEL -->
+    <div class="workout-panel" id="workoutPanel">
+        <div class="panel-header">
+            <span id="panelTitle">Workout 🔥</span>
+            <span id="closePanel">✖</span>
+        </div>
+
+        <div class="nav-btn prev" id="prevBtn">❮</div>
+        <div class="nav-btn next" id="nextBtn">❯</div>
+
+        <div class="slider-wrapper">
+            <div class="slider" id="gifContainer"></div>
+        </div>
+    </div>
+
+    <!-- VOICE ASSISTANT -->
+    <div class="voice-assistant" id="voiceAssistant">
+        <span class="close-voice" id="closeVoice">✖</span>
+        <div class="voice-content">
+            <img src="ai.png" class="ai-image">
+            <img src="voice hd.gif" class="voice-gif" id="voiceGif">
+            <p id="voiceStatus">Listening...</p>
+        </div>
+    </div>
+
+    <!-- FLOAT BUTTON -->
+    <img src="ai.png" class="voice-toggle" id="voiceToggle">
+
+    <!-- VIDEO SECTION -->
+    <section class="video-section" id="Video">
+        <h1 class="video-heading">Workout Videos</h1>
+        <p class="video-subtitle">Train with professional workout sessions</p>
+
+        <div class="video-container">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/ixkQaZXVQjs" allowfullscreen></iframe>
+                <h2>Chest Workout</h2>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/eGo4IYlbE5g" allowfullscreen></iframe>
+                <h2>Back Workout</h2>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/U0bhE67HuDY" allowfullscreen></iframe>
+                <h2>Shoulder Workout</h2>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/2tM1LFFxeKg" allowfullscreen></iframe>
+                <h2>Leg Workout</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEMBERSHIP -->
+    <section class="membership-section" id="Membership">
+        <h1 class="membership-heading">Membership Plans</h1>
+        <p class="membership-subtitle">Choose your AI fitness journey</p>
+
+        <div class="pricing-toggle">
+            <button class="toggle-btn active" id="monthlyBtn">Monthly</button>
+            <button class="toggle-btn" id="yearlyBtn">Yearly</button>
+        </div>
+
+        <div class="membership-container">
+
+            <div class="membership-card">
+                <div class="live-users">🔥 1,248 Active Users</div>
+                <h2>Basic</h2>
+                <h1 class="price" data-month="499" data-year="3999">₹499</h1>
+                <span class="duration">/month</span>
+                <ul>
+                    <li>✔ Workout Videos</li>
+                    <li>✔ BMI Calculator</li>
+                    <li>✔ Calorie Calculator</li>
+                    <li>❌ AI Diet Planner</li>
+                    <li>❌ Voice AI</li>
+                </ul>
+                <button>Join Now</button>
+            </div>
+
+            <div class="membership-card popular">
+                <div class="popular-tag">AI Recommended</div>
+                <div class="live-users">🚀 5,832 Active Users</div>
+                <h2>Pro</h2>
+                <h1 class="price" data-month="999" data-year="7999">₹999</h1>
+                <span class="duration">/month</span>
+                <ul>
+                    <li>✔ AI Diet Planner</li>
+                    <li>✔ Voice Assistant</li>
+                    <li>✔ Premium Workouts</li>
+                    <li>✔ Fitness Tracking</li>
+                    <li>✔ Smart Recommendations</li>
+                </ul>
+                <button>Get Pro</button>
+            </div>
+
+            <div class="membership-card elite">
+                <div class="live-users">👑 892 Elite Users</div>
+                <h2>Elite AI</h2>
+                <h1 class="price" data-month="1999" data-year="14999">₹1999</h1>
+                <span class="duration">/month</span>
+                <ul>
+                    <li>✔ AI Personal Coach</li>
+                    <li>✔ Full Analytics</li>
+                    <li>✔ Body Tracking</li>
+                    <li>✔ Premium Support</li>
+                    <li>✔ Advanced AI Features</li>
+                </ul>
+                <button>Become Elite</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BMI -->
+    <section class="bmi-section" id="BMI">
+        <div class="bmi-left">
+            <div class="bmi-card">
+                <h1>BMI Calculator</h1>
+
+                <div class="bmi-inputs">
+                    <input type="number" id="height" placeholder="Enter Height (CM)">
+                    <input type="number" id="weight" placeholder="Enter Weight (KG)">
+                </div>
+
+                <button id="bmiBtn">Calculate BMI</button>
+
+                <div class="bmi-result" id="bmiResult">Your BMI: --</div>
+                <div class="bmi-status" id="bmiStatus"></div>
+                <div class="bmi-ideal" id="bmiIdeal"></div>
+            </div>
+        </div>
+
+        <div class="bmi-right">
+            <img src="bmi.png" class="bmi-image">
+        </div>
+    </section>
+
+    <!-- CALORIE -->
+    <section class="calorie-section" id="Calories">
+
+        <div class="calorie-left">
+            <div class="calorie-card">
+                <h1>Calorie Calculator</h1>
+
+                <div class="calorie-inputs">
+                    <input type="number" id="calAge" placeholder="Enter Age">
+                    <input type="number" id="calHeight" placeholder="Enter Height (CM)">
+                    <input type="number" id="calWeight" placeholder="Enter Weight (KG)">
+                    <select id="calGender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <button id="calorieBtn">Calculate Calories</button>
+
+                <div class="calorie-result" id="calorieResult">Daily Calories: --</div>
+                <div class="calorie-info" id="calorieInfo"></div>
+            </div>
+        </div>
+
+        <div class="calorie-right">
+            <img src="calorie.png" class="calorie-image">
+        </div>
+
+    </section>
+
+    <!-- DIET -->
+    <section class="diet-section" id="Diet">
+
+        <div class="diet-left">
+            <div class="diet-card">
+                <h1>AI Diet Planner</h1>
+
+                <div class="diet-inputs">
+                    <input type="number" id="dietWeight" placeholder="Weight (KG)">
+                    <input type="number" id="dietHeight" placeholder="Height (CM)">
+                    <input type="number" id="dietAge" placeholder="Age">
+
+                    <select id="dietGoal">
+                        <option value="">Select Goal</option>
+                        <option value="fat loss">Fat Loss</option>
+                        <option value="muscle gain">Muscle Gain</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+
+                <button id="dietBtn">Generate AI Diet</button>
+
+                <div class="diet-result" id="dietResult"></div>
+            </div>
+        </div>
+
+        <div class="diet-right">
+            <div class="jarvis-orb">
+                <div class="orb-ring"></div>
+                <div class="orb-ring ring2"></div>
+                <div class="orb-core"></div>
+            </div>
+        </div>
+
+    </section>
+     <!-- ABOUT + CONTACT -->
+    <section class="about-section" id="About">
+
+        <div class="about-left">
+            <h1>About Fitness Buddy AI</h1>
+            <p>Fitness Buddy AI is your smart personal fitness assistant...</p>
+
+            <div class="about-features">
+                <div class="feature-box">🤖 AI Fitness Coach</div>
+                <div class="feature-box">🍎 Smart Diet Planner</div>
+                <div class="feature-box">🔥 Calorie Tracker</div>
+                <div class="feature-box">🎤 Voice Assistant</div>
+            </div>
+        </div>
+
+        <div class="about-right">
+            <div class="contact-card">
+                <h2>Contact Us</h2>
+                <form>
+                    <input type="text" placeholder="Your Name">
+                    <input type="email" placeholder="Your Email">
+                    <textarea placeholder="Your Message"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+    </section>
+    
+
+    <script src="gym.js"></script>
+
+</body>
+
+</html>
